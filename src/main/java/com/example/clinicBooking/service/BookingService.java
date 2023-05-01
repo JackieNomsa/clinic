@@ -1,10 +1,13 @@
 package com.example.clinicBooking.service;
 
-import com.example.clinicBooking.dto.BookingDTO;
 import com.example.clinicBooking.model.Booking;
 import com.example.clinicBooking.repository.BookingRepository;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
+@Component
+@Service
 public class BookingService {
     private final BookingRepository bookingRepository;
 
