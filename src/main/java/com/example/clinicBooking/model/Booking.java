@@ -1,5 +1,6 @@
 package com.example.clinicBooking.model;
 import lombok.*;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -10,6 +11,7 @@ import java.io.Serializable;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@AutoConfiguration
 @Table(name = "bookings")
 public class Booking implements Serializable {
 

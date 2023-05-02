@@ -2,6 +2,7 @@ package com.example.clinicBooking.service;
 
 import com.example.clinicBooking.model.Booking;
 import com.example.clinicBooking.repository.BookingRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class BookingService {
     private final BookingRepository bookingRepository;
-
+    @Autowired
     public BookingService(BookingRepository bookingRepository) {
         this.bookingRepository = bookingRepository;
     }
