@@ -1,9 +1,17 @@
 package com.example.clinicBooking.model;
-import javax.persistence.*;
+import lombok.*;
 
+import javax.persistence.*;
+import java.io.Serializable;
+
+@Getter
+@Setter
 @Entity
-@Table(name = "bookings", schema = "public")
-public class Booking {
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "bookings")
+public class Booking implements Serializable {
 
     @Id
     @Column(name = "patient_id", nullable = false)
