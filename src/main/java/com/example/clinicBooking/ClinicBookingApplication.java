@@ -1,6 +1,5 @@
 package com.example.clinicBooking;
 
-import com.example.clinicBooking.config.BookingConfig;
 import com.example.clinicBooking.repository.BookingRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -18,7 +17,7 @@ import org.springframework.web.client.RestTemplate;
 public class ClinicBookingApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BookingConfig.class, args);
+		SpringApplication.run(ClinicBookingApplication.class, args);
 	}
 
 }

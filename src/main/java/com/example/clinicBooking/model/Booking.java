@@ -1,18 +1,16 @@
 package com.example.clinicBooking.model;
+import jakarta.persistence.Entity;
 import lombok.*;
-import org.springframework.boot.autoconfigure.AutoConfiguration;
-
-import javax.persistence.*;
 import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Id;
 
-@Getter
-@Setter
+
 @Entity
-@Builder
-@AllArgsConstructor
+@Data
 @NoArgsConstructor
-@AutoConfiguration
-@Table(name = "bookings")
+@AllArgsConstructor
+@Builder
 public class Booking implements Serializable {
 
     @Id
