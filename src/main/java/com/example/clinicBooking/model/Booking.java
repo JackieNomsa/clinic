@@ -1,23 +1,20 @@
 package com.example.clinicBooking.model;
-import jakarta.persistence.Entity;
-import lombok.*;
+import javax.persistence.Entity;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Table(name="clinic_booking")
 public class Booking implements Serializable {
 
     @Id
-    @Column(name = "patient_id", nullable = false)
+    @Column(name="patient_id")
     private String patientId;
 
-    @Column(name = "first_name")
+    @Column(name="first_name")
     private String firstName;
 
     @Column(name = "last_name")

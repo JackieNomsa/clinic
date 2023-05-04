@@ -3,16 +3,22 @@ package com.example.clinicBooking.service;
 import com.example.clinicBooking.model.Booking;
 import com.example.clinicBooking.repository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
-
-@Component
-@Transactional
+@EnableJpaRepositories("com.example.clinicBooking.*")
+@ComponentScan(basePackages = { "com.example.clinicBooking.*" })
+@EntityScan("com.example.clinicBooking.*")
+@Service
 public class BookingServiceImp implements BookingService{
+    @Autowired
     private final BookingRepository bookingRepository;
     @Autowired
     public BookingServiceImp(BookingRepository bookingRepository) {
