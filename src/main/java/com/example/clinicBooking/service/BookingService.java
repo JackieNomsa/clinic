@@ -1,8 +1,6 @@
 package com.example.clinicBooking.service;
 
 import com.example.clinicBooking.model.Booking;
-import com.sun.source.tree.LambdaExpressionTree;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 public interface BookingService {
