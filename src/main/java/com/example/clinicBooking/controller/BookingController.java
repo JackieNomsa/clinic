@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 
-@Controller
+@RestController
 @RequestMapping("/clinic")
 public class BookingController {
     @Autowired
@@ -19,35 +19,27 @@ public class BookingController {
     public BookingController(BookingServiceImp bookingServiceImp){
         this.bookingServiceImp = bookingServiceImp;
     }
-    @RequestMapping(value = "/create",
-            method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping("/create")
     public ResponseEntity<?> addPatient(@RequestBody Booking patient) {
         this.bookingServiceImp.createBooking(patient);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
-    @RequestMapping(value = "/getById/{id}",
-            method = RequestMethod.GET)
-    @ResponseBody
-    public ResponseEntity getPatient(@RequestBody String id){
+    @GetMapping("/getById/{id}")
+    public ResponseEntity getPatient(@PathVariable String id){
         Booking booking = this.bookingServiceImp.getBookingById(id);
         if(booking != null) ResponseEntity.ok().body(booking);
         return ResponseEntity.notFound().build();
     }
 
-    @RequestMapping(value = "/update",
-            method = RequestMethod.PUT)
-    @ResponseBody
+    @PutMapping("/update")
     public ResponseEntity updatePatient(@RequestBody Booking patient){
         Booking booking = this.bookingServiceImp.updateBooking(patient,patient.getPatientId());
         if(booking != null) ResponseEntity.ok().body(booking);
         return ResponseEntity.notFound().build();
     }
 
-    @RequestMapping(value = "/delete",
-            method = RequestMethod.DELETE)
-    @ResponseBody
+    @DeleteMapping("/delete")
     public ResponseEntity deletePatient(@RequestBody String id){
         this.bookingServiceImp.deleteBookingById(id);
         return ResponseEntity.ok().build();
