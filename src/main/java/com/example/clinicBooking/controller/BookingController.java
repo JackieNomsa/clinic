@@ -5,7 +5,6 @@ import com.example.clinicBooking.service.BookingServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -26,23 +25,25 @@ public class BookingController {
     }
 
     @GetMapping("/getById/{id}")
+    @ResponseBody
     public ResponseEntity getPatient(@PathVariable String id){
         Booking booking = this.bookingServiceImp.getBookingById(id);
-        if(booking != null) ResponseEntity.ok().body(booking);
+        if(booking != null) return ResponseEntity.ok().body(booking);
         return ResponseEntity.notFound().build();
     }
 
-    @PutMapping("/update")
+    @PostMapping("/update")
     public ResponseEntity updatePatient(@RequestBody Booking patient){
-        Booking booking = this.bookingServiceImp.updateBooking(patient,patient.getPatientId());
-        if(booking != null) ResponseEntity.ok().body(booking);
+        Booking booking = this.bookingServiceImp.updateBooking(patient);
+        if(booking != null) return ResponseEntity.ok().body(booking);
         return ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("/delete")
-    public ResponseEntity deletePatient(@RequestBody String id){
-        this.bookingServiceImp.deleteBookingById(id);
-        return ResponseEntity.ok().build();
+    @PostMapping("/delete/{id}")
+    public ResponseEntity deletePatient(@PathVariable String id){
+        System.out.println("#######################################################");
+        Booking booking = this.bookingServiceImp.deleteBookingById(id);
+        if(booking != null) return ResponseEntity.ok().build();
+        return ResponseEntity.notFound().build();
     }
-
 }

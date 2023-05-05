@@ -5,6 +5,7 @@ import com.example.clinicBooking.repository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -29,6 +30,7 @@ public class BookingServiceImp implements BookingService{
         booking.setFirstName(patient.getFirstName());
         booking.setLastName(patient.getLastName());
         booking.setPatientId(patient.getPatientId());
+        booking.setStatus(patient.getStatus());
         bookingRepository.save(booking);
         return booking;
     }
@@ -39,12 +41,16 @@ public class BookingServiceImp implements BookingService{
     }
 
     @Override
-    public Booking updateBooking(Booking booking, String bookingId) {
-        Optional<Booking> booking1 = bookingRepository.findById(bookingId);
+    public Booking updateBooking(Booking booking) {
+        Optional<Booking> booking1 = bookingRepository.findById(booking.getPatientId());
         if (booking1.isEmpty()){
             return null;
         }
-        return booking1.get();
+        Booking updatedBooking = booking1.get();
+        bookingRepository.delete(booking1.get());
+        updatedBooking.setStatus(booking.getStatus());
+        bookingRepository.save(updatedBooking);
+        return updatedBooking;
     }
 
     @Override
@@ -57,7 +63,13 @@ public class BookingServiceImp implements BookingService{
     }
 
     @Override
-    public void deleteBookingById(String bookingId) {
-
+    public Booking deleteBookingById(String bookingId) {
+        Optional<Booking> booking1 = bookingRepository.findById(bookingId);
+        if (booking1.isEmpty()){
+            return null;
+        }
+        Booking deletedBooking = booking1.get();
+        bookingRepository.delete(deletedBooking);
+        return deletedBooking;
     }
 }
