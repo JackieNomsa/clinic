@@ -36,4 +36,21 @@ public class BookingController {
         return ResponseEntity.notFound().build();
     }
 
+    @RequestMapping(value = "/update",
+            method = RequestMethod.PUT)
+    @ResponseBody
+    public ResponseEntity updatePatient(@RequestBody Booking patient){
+        Booking booking = this.bookingServiceImp.updateBooking(patient,patient.getPatientId());
+        if(booking != null) ResponseEntity.ok().body(booking);
+        return ResponseEntity.notFound().build();
+    }
+
+    @RequestMapping(value = "/delete",
+            method = RequestMethod.DELETE)
+    @ResponseBody
+    public ResponseEntity deletePatient(@RequestBody String id){
+        this.bookingServiceImp.deleteBookingById(id);
+        return ResponseEntity.ok().build();
+    }
+
 }
