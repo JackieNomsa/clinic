@@ -1,6 +1,5 @@
 package com.example.clinicBooking.controller;
 
-import com.example.clinicBooking.dto.BookingDTO;
 import com.example.clinicBooking.model.Booking;
 import com.example.clinicBooking.service.BookingServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.print.Book;
 
 @Controller
 @RequestMapping("/clinic")
@@ -29,10 +27,10 @@ public class BookingController {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
-    @RequestMapping(value = "/getById",
+    @RequestMapping(value = "/getById/{id}",
             method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity getPatient(String id){
+    public ResponseEntity getPatient(@RequestBody String id){
         Booking booking = this.bookingServiceImp.getBookingById(id);
         if(booking != null) ResponseEntity.ok().body(booking);
         return ResponseEntity.notFound().build();
