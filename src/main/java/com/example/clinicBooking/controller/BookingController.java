@@ -41,7 +41,6 @@ public class BookingController {
 
     @PostMapping("/delete/{id}")
     public ResponseEntity deletePatient(@PathVariable String id){
-        System.out.println("#######################################################");
         Booking booking = this.bookingServiceImp.deleteBookingById(id);
         if(booking != null) return ResponseEntity.ok().build();
         return ResponseEntity.notFound().build();
