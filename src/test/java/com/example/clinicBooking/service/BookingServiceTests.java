@@ -36,7 +36,16 @@ public class BookingServiceTests {
         Booking booking1 = bookingService.createBooking(booking);
         assert Objects.equals(booking1.getFirstName(), booking.getFirstName());
         assertEquals("1234567890345",booking.getPatientId());
+    }
 
+    @Test
+    void testCreateBookingFailsIfValueExists(){
+        Mockito.when(bookingRepository.findById(any()))
+                .thenReturn(Optional.ofNullable(booking));
+        Booking testBooking = bookingService.getBookingById("1234567890345");
+        assertNotNull(testBooking);
+        Booking testCreateBooking = bookingService.createBooking(testBooking);
+        assertNull(testCreateBooking);
     }
 
     @Test
@@ -49,8 +58,12 @@ public class BookingServiceTests {
     }
 
     @Test
-    void testDeleteBooking(){
-
+    void testDeleteBookingDoesNotExist(){
+        Booking testBooking = bookingService.getBookingById("1234567890345");
+        Mockito.when(bookingRepository.findById(any()))
+                .thenReturn(Optional.ofNullable(testBooking));
+        assertNull(bookingService.deleteBookingById("12345"));
+        assertEquals(testBooking,bookingService.deleteBookingById("1234567890345"));
     }
 
     @Test
@@ -63,7 +76,22 @@ public class BookingServiceTests {
     }
 
     @Test
+    void testGetOneReturnsNull(){
+        Booking testBooking = bookingService.getBookingById("1234567890345");
+        assertNull(testBooking);
+    }
+
+    @Test
     void testUpdateBooking(){
+        Mockito.when(bookingRepository.findById(any()))
+                .thenReturn(Optional.ofNullable(booking));
+        Booking testBooking = bookingService.getBookingById("1234567890345");
+        assert testBooking != null;
+        testBooking.setLastName("updated");
+        testBooking.setStatus("booked");
+        Booking updateBooking = bookingService.updateBooking(testBooking);
+        assertEquals("updated",updateBooking.getLastName());
+        assertEquals("1234567890345",updateBooking.getPatientId());
 
     }
 }
