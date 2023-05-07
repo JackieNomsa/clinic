@@ -46,7 +46,6 @@ public class BookingServiceImp implements BookingService{
             return null;
         }
         Booking updatedBooking = booking1.get();
-        bookingRepository.delete(booking1.get());
         updatedBooking.setStatus(booking.getStatus());
         bookingRepository.save(updatedBooking);
         return updatedBooking;
