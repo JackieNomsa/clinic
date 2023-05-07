@@ -2,73 +2,50 @@ package com.example.clinicBooking.service;
 
 import com.example.clinicBooking.model.Booking;
 import com.example.clinicBooking.repository.BookingRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.context.annotation.Bean;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
+import org.junit.jupiter.api.extension.ExtendWith;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(
-        webEnvironment = SpringBootTest.WebEnvironment.MOCK,
-        classes = BookingServiceImp.class)
-@AutoConfigureMockMvc
-@TestPropertySource(
-        locations = "classpath:application-integration-test.properties")
+@ExtendWith(MockitoExtension.class)
 public class BookingServiceTests {
-    @Autowired
-    private MockMvc mvc;
-
-    @Autowired
+    @Mock
     private BookingRepository bookingRepository;
+    private BookingServiceImp bookingService;
+    Booking booking;
 
-    @TestConfiguration
-    static class BookingServiceImplTestContextConfiguration {
-        @Bean
-        public BookingService employeeService() {
-            return new BookingService() {
-                @Override
-                public Booking createBooking(Booking booking) {
-                    return null;
-                }
-
-                @Override
-                public List<Booking> fetchBookingList() {
-                    return null;
-                }
-
-                @Override
-                public Booking updateBooking(Booking booking) {
-                    return null;
-                }
-
-                @Override
-                public Booking getBookingById(String bookingId) {
-                    return null;
-                }
-
-                @Override
-                public Booking deleteBookingById(String bookingId) {
-                    return null;
-                }
-            };
-        }
+    @BeforeEach void setUp() {
+        this.bookingService = new BookingServiceImp(this.bookingRepository);
+        this.booking = new Booking();
+        this.booking.setStatus("waiting");
+        this.booking.setFirstName("test");
+        this.booking.setLastName("tested");
+        this.booking.setPatientId("1234567890345");
     }
     @Test
     void testCreateBooking(){
+        Booking booking1 = bookingService.createBooking(booking);
+        assert Objects.equals(booking1.getFirstName(), booking.getFirstName());
+        assertEquals("1234567890345",booking.getPatientId());
 
     }
 
     @Test
     void testFetchAllBookings(){
-
+        List<Booking> bookings = List.of(booking);
+        Mockito.when(bookingRepository.findAll())
+        .thenReturn(bookings);
+        assertEquals(1,bookingService.fetchBookingList().size());
+        assertEquals("test",bookingService.fetchBookingList().get(0).getFirstName());
     }
 
     @Test
@@ -78,7 +55,11 @@ public class BookingServiceTests {
 
     @Test
     void testGetBookingById(){
-
+        Mockito.when(bookingRepository.findById(any()))
+                .thenReturn(Optional.ofNullable(booking));
+        Booking testBooking = bookingService.getBookingById("1234567890345");
+        assertNotNull(testBooking);
+        assertEquals("waiting",testBooking.getStatus());
     }
 
     @Test
