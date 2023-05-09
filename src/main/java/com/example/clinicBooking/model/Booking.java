@@ -23,7 +23,7 @@ public class Booking implements Serializable {
     private String lastName;
 
     @Column(name = "status")
-    private String status; //booked, waiting, missed, cancelled,rescheduled
+    private String status;
 
     public String getPatientId() {
         return patientId;

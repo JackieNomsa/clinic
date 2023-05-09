@@ -1,8 +1,6 @@
 package com.example.clinicBooking.service;
 
 import com.example.clinicBooking.model.Booking;
-import org.springframework.http.ResponseEntity;
-
 import java.util.List;
 public interface BookingService {
     Booking createBooking(Booking booking);
