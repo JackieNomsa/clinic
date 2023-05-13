@@ -1,10 +1,7 @@
 package com.example.clinicBooking.model;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
 
@@ -13,6 +10,8 @@ import java.io.Serializable;
 public class Booking implements Serializable {
 
     @Id
+    @OneToOne(mappedBy = "id", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
     @Column(name="patient_id")
     private String patientId;
 
