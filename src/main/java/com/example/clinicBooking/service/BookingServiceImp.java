@@ -34,6 +34,11 @@ public class BookingServiceImp implements BookingService{
         booking.setPatientId(patient.getPatientId());
         booking.setStatus(patient.getStatus());
         bookingRepository.save(booking);
+        //TODO
+        // add external call to slots api and get an available time to assign to user
+        // if no slot available set status as waiting
+        // maybe make the call first and give the user a choice if more than one option available
+        // if only one option available book it
         return booking;
     }
 
@@ -60,6 +65,8 @@ public class BookingServiceImp implements BookingService{
         if (booking1.isEmpty()){
             return null;
         }
+        //TODO
+        // return a different model that also contains the date and time for the frontend ui
         return booking1.get();
     }
 
@@ -71,6 +78,9 @@ public class BookingServiceImp implements BookingService{
         }
         Booking deletedBooking = booking1.get();
         bookingRepository.delete(deletedBooking);
+        //TODO
+        // check that data on linked table cascades on delete and frees up slots oon the other api
+        // on delete api should update slots api so that is marks the time as available
         return deletedBooking;
     }
 }
