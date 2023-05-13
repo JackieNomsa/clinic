@@ -1,6 +1,7 @@
 package com.example.clinicBooking.service;
 
 import com.example.clinicBooking.model.Booking;
+import com.example.clinicBooking.repository.BookingDetailsRepository;
 import com.example.clinicBooking.repository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -15,9 +16,11 @@ import java.util.Optional;
 public class BookingServiceImp implements BookingService{
     @Autowired
     private final BookingRepository bookingRepository;
+    private final BookingDetailsRepository bookingDetailsRepository;
     @Autowired
-    public BookingServiceImp(BookingRepository bookingRepository) {
+    public BookingServiceImp(BookingRepository bookingRepository, BookingDetailsRepository bookingDetailsRepository) {
         this.bookingRepository = bookingRepository;
+        this.bookingDetailsRepository = bookingDetailsRepository;
     }
 
     @Override
