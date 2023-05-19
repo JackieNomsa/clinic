@@ -13,5 +13,5 @@ public interface DetailsService {
     BookingDetails getBookingDetails(String id);
     BookingDetails deleteBooking(String id);
     BookingDetails createBookingSlot(Booking booking);
-    Map<String, Date> getAvailableSlots();
+    List<Date> getAvailableSlots();
 }
