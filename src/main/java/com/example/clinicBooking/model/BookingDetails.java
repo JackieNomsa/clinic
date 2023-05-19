@@ -20,4 +20,7 @@ public class BookingDetails {
 
     @Column(name = "time")
     private Date time;
+
+    @Column(name = "address")
+    private String address;
 }

@@ -39,6 +39,7 @@ public class BookingServiceImp implements BookingService{
         // if no slot available set status as waiting
         // maybe make the call first and give the user a choice if more than one option available
         // if only one option available book it
+
         return booking;
     }
 
