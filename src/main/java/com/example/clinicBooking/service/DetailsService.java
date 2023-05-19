@@ -2,6 +2,7 @@ package com.example.clinicBooking.service;
 
 import com.example.clinicBooking.model.Booking;
 import com.example.clinicBooking.model.BookingDetails;
+import com.example.clinicBooking.model.SlotDetails;
 import org.springframework.http.ResponseEntity;
 
 import java.util.Date;
@@ -13,5 +14,5 @@ public interface DetailsService {
     BookingDetails getBookingDetails(String id);
     BookingDetails deleteBooking(String id);
     BookingDetails createBookingSlot(Booking booking);
-    List<Date> getAvailableSlots();
+    SlotDetails[] getAvailableSlots();
 }
