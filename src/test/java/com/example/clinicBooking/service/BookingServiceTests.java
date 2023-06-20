@@ -1,7 +1,6 @@
 package com.example.clinicBooking.service;
 
 import com.example.clinicBooking.model.Booking;
-import com.example.clinicBooking.repository.BookingDetailsRepository;
 import com.example.clinicBooking.repository.BookingRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,12 +20,11 @@ import java.util.Optional;
 public class BookingServiceTests {
     @Mock
     private BookingRepository bookingRepository;
-    private BookingDetailsRepository bookingDetailsRepository;
     private BookingServiceImp bookingService;
     Booking booking;
 
     @BeforeEach void setUp() {
-        this.bookingService = new BookingServiceImp(this.bookingRepository, this.bookingDetailsRepository);
+        this.bookingService = new BookingServiceImp(this.bookingRepository);
         this.booking = new Booking();
         this.booking.setStatus("waiting");
         this.booking.setFirstName("test");

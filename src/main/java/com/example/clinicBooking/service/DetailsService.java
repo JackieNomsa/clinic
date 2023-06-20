@@ -1,18 +1,12 @@
 package com.example.clinicBooking.service;
 
 import com.example.clinicBooking.model.Booking;
-import com.example.clinicBooking.model.BookingDetails;
 import com.example.clinicBooking.model.SlotDetails;
-import org.springframework.http.ResponseEntity;
-
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
 
 public interface DetailsService {
 
-    BookingDetails getBookingDetails(String id);
-    BookingDetails deleteBooking(String id);
-    BookingDetails createBookingSlot(Booking booking);
+    SlotDetails getBookingDetails(String id);
+    SlotDetails deleteBooking(String id);
+    SlotDetails createBookingSlot(Booking booking);
     SlotDetails[] getAvailableSlots();
 }

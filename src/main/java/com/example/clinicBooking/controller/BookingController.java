@@ -7,8 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:4200")
+
+//@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/clinic")
 public class BookingController {
@@ -27,21 +29,29 @@ public class BookingController {
 
     @GetMapping("/getById/{id}")
     @ResponseBody
-    public ResponseEntity getPatient(@PathVariable String id){
+    public ResponseEntity<?> getPatient(@PathVariable String id){
         Booking booking = this.bookingServiceImp.getBookingById(id);
         if(booking != null) return ResponseEntity.ok().body(booking);
         return ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/getAll")
+    @ResponseBody
+    public ResponseEntity<?> getAllBookings(){
+        List<Booking> bookings = this.bookingServiceImp.fetchBookingList();
+        if(bookings != null) return ResponseEntity.ok().body(bookings);
+        return ResponseEntity.notFound().build();
+    }
+
     @PostMapping("/update")
-    public ResponseEntity updatePatient(@RequestBody Booking patient){
+    public ResponseEntity<?> updatePatient(@RequestBody Booking patient){
         Booking booking = this.bookingServiceImp.updateBooking(patient);
         if(booking != null) return ResponseEntity.ok().body(booking);
         return ResponseEntity.notFound().build();
     }
 
     @PostMapping("/delete/{id}")
-    public ResponseEntity deletePatient(@PathVariable String id){
+    public ResponseEntity<?> deletePatient(@PathVariable String id){
         Booking booking = this.bookingServiceImp.deleteBookingById(id);
         if(booking != null) return ResponseEntity.ok().build();
         return ResponseEntity.notFound().build();

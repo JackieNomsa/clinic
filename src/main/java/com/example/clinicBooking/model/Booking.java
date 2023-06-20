@@ -22,6 +22,17 @@ public class Booking implements Serializable {
     @Column(name = "status")
     private String status;
 
+    @Column(name = "booking_ref")
+    private String booking_ref;
+
+    public String getBookingRef() {
+        return booking_ref;
+    }
+
+    public void setBookingRef(String booking_ref) {
+        this.booking_ref = booking_ref;
+    }
+
     public String getPatientId() {
         return patientId;
     }
