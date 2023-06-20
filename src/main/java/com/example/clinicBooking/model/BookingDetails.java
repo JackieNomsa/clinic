@@ -10,9 +10,6 @@ public class BookingDetails {
     //must contain user id and reference number from slots_management service to assign a time slot
 
     @Id
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "id")
     private String id;
 
     @Column(name = "reference")

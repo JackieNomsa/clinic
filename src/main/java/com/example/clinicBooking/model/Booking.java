@@ -10,8 +10,6 @@ import java.io.Serializable;
 public class Booking implements Serializable {
 
     @Id
-    @OneToOne(mappedBy = "id", cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
     @Column(name="patient_id")
     private String patientId;
 
