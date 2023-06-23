@@ -1,7 +1,9 @@
 package com.example.clinicBooking.controller;
 
 import com.example.clinicBooking.model.Booking;
+import com.example.clinicBooking.model.SlotDetails;
 import com.example.clinicBooking.service.BookingServiceImp;
+import com.example.clinicBooking.service.DetailsServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,21 +12,27 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
-//@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/clinic")
 public class BookingController {
     @Autowired
     private final BookingServiceImp bookingServiceImp;
-
     @Autowired
-    public BookingController(BookingServiceImp bookingServiceImp){
+    private final DetailsServiceImp detailsServiceImp;
+    @Autowired
+    public BookingController(BookingServiceImp bookingServiceImp, DetailsServiceImp detailsServiceImp){
         this.bookingServiceImp = bookingServiceImp;
+        this.detailsServiceImp = detailsServiceImp;
     }
     @PostMapping("/create")
     public ResponseEntity<?> addPatient(@RequestBody Booking patient) {
-        this.bookingServiceImp.createBooking(patient);
-        return ResponseEntity.status(HttpStatus.OK).build();
+        Booking booking = this.bookingServiceImp.createBooking(patient);
+        SlotDetails[] availableSlots = detailsServiceImp.getAvailableSlots();
+        if(booking != null){
+            return ResponseEntity.status(HttpStatus.OK).body(availableSlots);
+
+        }return ResponseEntity.status(HttpStatus.CONFLICT).build();
+
     }
 
     @GetMapping("/getById/{id}")
@@ -44,8 +52,8 @@ public class BookingController {
     }
 
     @PostMapping("/update")
-    public ResponseEntity<?> updatePatient(@RequestBody Booking patient){
-        Booking booking = this.bookingServiceImp.updateBooking(patient);
+    public ResponseEntity<?> updatePatient(@RequestBody String patientId,String bookingReference){
+        Booking booking = this.bookingServiceImp.updateBooking(patientId,bookingReference);
         if(booking != null) return ResponseEntity.ok().body(booking);
         return ResponseEntity.notFound().build();
     }

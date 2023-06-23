@@ -21,6 +21,7 @@ public class BookingServiceTests {
     @Mock
     private BookingRepository bookingRepository;
     private BookingServiceImp bookingService;
+    private DetailsServiceImp detailsServiceImp;
     Booking booking;
 
     @BeforeEach void setUp() {
@@ -87,11 +88,11 @@ public class BookingServiceTests {
                 .thenReturn(Optional.ofNullable(booking));
         Booking testBooking = bookingService.getBookingById("1234567890345");
         assert testBooking != null;
-        testBooking.setLastName("updated");
-        testBooking.setStatus("booked");
-        Booking updateBooking = bookingService.updateBooking(testBooking);
-        assertEquals("updated",updateBooking.getLastName());
+        Booking updateBooking = bookingService.updateBooking(testBooking.getPatientId(),"43456");
+        assertEquals("booked",updateBooking.getLastName());
         assertEquals("1234567890345",updateBooking.getPatientId());
+        assertEquals("43456",updateBooking.getBookingRef());
+
 
     }
 }

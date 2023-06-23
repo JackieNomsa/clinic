@@ -31,12 +31,6 @@ public class BookingServiceImp implements BookingService{
         booking.setPatientId(patient.getPatientId());
         booking.setStatus(patient.getStatus());
         bookingRepository.save(booking);
-        //TODO
-        // add external call to slots api and get an available time to assign to user
-        // if no slot available set status as waiting
-        // maybe make the call first and give the user a choice if more than one option available
-        // if only one option available book it
-
         return booking;
     }
 
@@ -46,13 +40,14 @@ public class BookingServiceImp implements BookingService{
     }
 
     @Override
-    public Booking updateBooking(Booking booking) {
-        Optional<Booking> booking1 = bookingRepository.findById(booking.getPatientId());
+    public Booking updateBooking(String bookingId,String bookingReference) {
+        Optional<Booking> booking1 = bookingRepository.findById(bookingId);
         if (booking1.isEmpty()){
             return null;
         }
         Booking updatedBooking = booking1.get();
-        updatedBooking.setStatus(booking.getStatus());
+        updatedBooking.setStatus("booked");
+        updatedBooking.setBookingRef(bookingReference);
         bookingRepository.save(updatedBooking);
         return updatedBooking;
     }
