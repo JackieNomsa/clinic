@@ -14,13 +14,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/clinic")
-public class BookingController {
+public class ClinicController {
     @Autowired
     private final BookingServiceImp bookingServiceImp;
     @Autowired
     private final DetailsServiceImp detailsServiceImp;
     @Autowired
-    public BookingController(BookingServiceImp bookingServiceImp, DetailsServiceImp detailsServiceImp){
+    public ClinicController(BookingServiceImp bookingServiceImp, DetailsServiceImp detailsServiceImp){
         this.bookingServiceImp = bookingServiceImp;
         this.detailsServiceImp = detailsServiceImp;
     }

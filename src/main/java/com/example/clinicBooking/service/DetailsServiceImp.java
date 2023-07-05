@@ -6,12 +6,16 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 public class DetailsServiceImp implements DetailsService{
-
     @Override
     public SlotDetails getBookingDetails(String id) {
-        //TODO:
-        //make call to external api and thor an error if BookingDetails is null
-        return null;
+        SlotDetails slotDetails;
+        final String url = "http://localhost:8081/api/homeaffairs";
+        RestTemplate restTemplate = new RestTemplate();
+        try {
+            return restTemplate.getForObject(url, SlotDetails.class);
+        }catch (RestClientException e){
+            return null;
+        }
     }
 
     @Override
@@ -30,7 +34,7 @@ public class DetailsServiceImp implements DetailsService{
     public SlotDetails[] getAvailableSlots() {
         RestTemplate restTemplate = new RestTemplate();
         try {
-            String url = "http://localhost:8081/slots";
+            String url = "http://localhost:8081/homeaffairs";
             return restTemplate.getForObject(url, SlotDetails[].class);
         }catch (RestClientException e){
             return null;
