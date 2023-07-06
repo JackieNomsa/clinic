@@ -22,13 +22,12 @@ public class ClinicBookingServiceTests {
     @Mock
     private ClinicBookingRepository bookingRepository;
     @Mock
-    private HomeAffairsBookingRepository homeAffairsBookingRepository;
     private ClinicClinicBookingServiceImp bookingService;
     private DetailsServiceImp detailsServiceImp;
     Booking booking;
 
     @BeforeEach void setUp() {
-        this.bookingService = new ClinicClinicBookingServiceImp(this.bookingRepository, homeAffairsBookingRepository);
+        this.bookingService = new ClinicClinicBookingServiceImp(this.bookingRepository);
         this.booking = new Booking();
         this.booking.setStatus("waiting");
         this.booking.setFirstName("test");
