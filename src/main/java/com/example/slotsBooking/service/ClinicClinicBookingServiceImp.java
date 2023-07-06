@@ -4,14 +4,10 @@ import com.example.slotsBooking.model.Booking;
 import com.example.slotsBooking.repository.ClinicBookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-@ComponentScan(basePackages = { "com.example.slotsBooking.*" })
-@EntityScan("com.example.slotsBooking.*")
 @Service
 public class ClinicClinicBookingServiceImp implements ClinicBookingService {
     @Autowired

@@ -11,10 +11,11 @@ import org.springframework.web.client.RestTemplate;
 public class DetailsServiceImp implements DetailsService{
     @Value("slots.service.url")
     String slotsUrl;
+    RestTemplate restTemplate;
     @Override
     public SlotDetails getBookingDetails(String id,String type) {
         SlotDetails slotDetails;
-        RestTemplate restTemplate = new RestTemplate();
+        restTemplate = new RestTemplate();
         try {
             return restTemplate.getForObject(this.slotsUrl.concat(type).concat(id), SlotDetails.class);
         }catch (RestClientException e){
@@ -24,13 +25,19 @@ public class DetailsServiceImp implements DetailsService{
 
     @Override
     public SlotDetails deleteBooking(String id,String type) {
-        //TODO:
-        //Delete booking if exists and throw an error if not, delete must cascade
-        return null;
+        restTemplate = new RestTemplate();
+        try {
+            return restTemplate.getForObject(this.slotsUrl.concat(type).concat("/delete/"+id), SlotDetails.class);
+        }catch (RestClientException e){
+            return null;
+        }
     }
 
     @Override
-    public SlotDetails createBookingSlot(Booking booking,String type) {
+    public Booking createBookingSlot(Booking booking,SlotDetails slotDetails,String type) {
+        //TODO
+        // add reference to slot detail / Booking
+        // update booking status
         return null;
     }
 
