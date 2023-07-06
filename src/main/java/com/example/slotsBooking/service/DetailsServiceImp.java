@@ -3,9 +3,11 @@ package com.example.slotsBooking.service;
 import com.example.slotsBooking.model.Booking;
 import com.example.slotsBooking.model.SlotDetails;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
+@Service
 public class DetailsServiceImp implements DetailsService{
     @Value("slots.service.url")
     String slotsUrl;
@@ -36,8 +38,7 @@ public class DetailsServiceImp implements DetailsService{
     public SlotDetails[] getAvailableSlots(String type) {
         RestTemplate restTemplate = new RestTemplate();
         try {
-            String url = "http://localhost:8081/homeaffairs";
-            return restTemplate.getForObject(url, SlotDetails[].class);
+            return restTemplate.getForObject(this.slotsUrl.concat(type), SlotDetails[].class);
         }catch (RestClientException e){
             return null;
         }
