@@ -1,28 +1,36 @@
-package com.example.clinicBooking.service;
+package com.example.slotsBooking.service;
 
-import com.example.clinicBooking.model.Booking;
-import com.example.clinicBooking.repository.BookingRepository;
+import com.example.slotsBooking.model.Booking;
+import com.example.slotsBooking.repository.ClinicBookingRepository;
+import com.example.slotsBooking.repository.HomeAffairsBookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-@ComponentScan(basePackages = { "com.example.clinicBooking.*" })
-@EntityScan("com.example.clinicBooking.*")
+@ComponentScan(basePackages = { "com.example.slotsBooking.*" })
+@EntityScan("com.example.slotsBooking.*")
 @Service
-public class BookingServiceImp implements BookingService{
+public class ClinicClinicBookingServiceImp implements ClinicBookingService {
     @Autowired
-    private final BookingRepository bookingRepository;
+    private final ClinicBookingRepository clinicBookingRepository;
     @Autowired
-    public BookingServiceImp(BookingRepository bookingRepository) {
-        this.bookingRepository = bookingRepository;
+    private final HomeAffairsBookingRepository homeAffairsBookingRepository;
+
+    @Value("slots.service.url")
+    String slotsUrl;
+    @Autowired
+    public ClinicClinicBookingServiceImp(ClinicBookingRepository bookingRepository, HomeAffairsBookingRepository homeAffairsBookingRepository) {
+        this.clinicBookingRepository = bookingRepository;
+        this.homeAffairsBookingRepository = homeAffairsBookingRepository;
     }
 
     @Override
     public Booking createBooking(Booking patient) {
-        if(bookingRepository.findById(patient.getPatientId()).isPresent()) {
+        if(clinicBookingRepository.findById(patient.getPatientId()).isPresent()) {
             return null;
         }
         Booking booking = new Booking();
@@ -30,31 +38,31 @@ public class BookingServiceImp implements BookingService{
         booking.setLastName(patient.getLastName());
         booking.setPatientId(patient.getPatientId());
         booking.setStatus(patient.getStatus());
-        bookingRepository.save(booking);
+        clinicBookingRepository.save(booking);
         return booking;
     }
 
     @Override
     public List<Booking> fetchBookingList() {
-        return (List<Booking>) bookingRepository.findAll();
+        return (List<Booking>) clinicBookingRepository.findAll();
     }
 
     @Override
     public Booking updateBooking(String bookingId,String bookingReference) {
-        Optional<Booking> booking1 = bookingRepository.findById(bookingId);
+        Optional<Booking> booking1 = clinicBookingRepository.findById(bookingId);
         if (booking1.isEmpty()){
             return null;
         }
         Booking updatedBooking = booking1.get();
         updatedBooking.setStatus("booked");
         updatedBooking.setBookingRef(bookingReference);
-        bookingRepository.save(updatedBooking);
+        clinicBookingRepository.save(updatedBooking);
         return updatedBooking;
     }
 
     @Override
     public Booking getBookingById(String bookingId) {
-        Optional<Booking> booking1 = bookingRepository.findById(bookingId);
+        Optional<Booking> booking1 = clinicBookingRepository.findById(bookingId);
         if (booking1.isEmpty()){
             return null;
         }
@@ -65,12 +73,12 @@ public class BookingServiceImp implements BookingService{
 
     @Override
     public Booking deleteBookingById(String bookingId) {
-        Optional<Booking> booking1 = bookingRepository.findById(bookingId);
+        Optional<Booking> booking1 = clinicBookingRepository.findById(bookingId);
         if (booking1.isEmpty()){
             return null;
         }
         Booking deletedBooking = booking1.get();
-        bookingRepository.delete(deletedBooking);
+        clinicBookingRepository.delete(deletedBooking);
         //TODO
         // check that data on linked table cascades on delete and frees up slots oon the other api
         // on delete api should update slots api so that is marks the time as available

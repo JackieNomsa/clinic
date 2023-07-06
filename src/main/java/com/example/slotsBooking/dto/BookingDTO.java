@@ -1,4 +1,4 @@
-package com.example.clinicBooking.dto;
+package com.example.slotsBooking.dto;
 
 import lombok.Getter;
 import lombok.Setter;

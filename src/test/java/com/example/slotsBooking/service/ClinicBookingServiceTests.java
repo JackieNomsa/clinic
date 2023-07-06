@@ -1,7 +1,8 @@
-package com.example.clinicBooking.service;
+package com.example.slotsBooking.service;
 
-import com.example.clinicBooking.model.Booking;
-import com.example.clinicBooking.repository.BookingRepository;
+import com.example.slotsBooking.model.Booking;
+import com.example.slotsBooking.repository.ClinicBookingRepository;
+import com.example.slotsBooking.repository.HomeAffairsBookingRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,15 +18,17 @@ import java.util.Objects;
 import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
-public class BookingServiceTests {
+public class ClinicBookingServiceTests {
     @Mock
-    private BookingRepository bookingRepository;
-    private BookingServiceImp bookingService;
+    private ClinicBookingRepository bookingRepository;
+    @Mock
+    private HomeAffairsBookingRepository homeAffairsBookingRepository;
+    private ClinicClinicBookingServiceImp bookingService;
     private DetailsServiceImp detailsServiceImp;
     Booking booking;
 
     @BeforeEach void setUp() {
-        this.bookingService = new BookingServiceImp(this.bookingRepository);
+        this.bookingService = new ClinicClinicBookingServiceImp(this.bookingRepository, homeAffairsBookingRepository);
         this.booking = new Booking();
         this.booking.setStatus("waiting");
         this.booking.setFirstName("test");

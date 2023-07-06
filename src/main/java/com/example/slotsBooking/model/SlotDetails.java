@@ -1,4 +1,4 @@
-package com.example.clinicBooking.model;
+package com.example.slotsBooking.model;
 
 import java.util.Date;
 

@@ -1,4 +1,4 @@
-package com.example.clinicBooking.service;
+package com.example.slotsBooking.service;
 
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;

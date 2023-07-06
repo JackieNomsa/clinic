@@ -1,37 +1,39 @@
-package com.example.clinicBooking.service;
+package com.example.slotsBooking.service;
 
-import com.example.clinicBooking.model.Booking;
-import com.example.clinicBooking.model.SlotDetails;
+import com.example.slotsBooking.model.Booking;
+import com.example.slotsBooking.model.SlotDetails;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 public class DetailsServiceImp implements DetailsService{
+    @Value("slots.service.url")
+    String slotsUrl;
     @Override
-    public SlotDetails getBookingDetails(String id) {
+    public SlotDetails getBookingDetails(String id,String type) {
         SlotDetails slotDetails;
-        final String url = "http://localhost:8081/api/homeaffairs";
         RestTemplate restTemplate = new RestTemplate();
         try {
-            return restTemplate.getForObject(url, SlotDetails.class);
+            return restTemplate.getForObject(this.slotsUrl.concat(type).concat(id), SlotDetails.class);
         }catch (RestClientException e){
             return null;
         }
     }
 
     @Override
-    public SlotDetails deleteBooking(String id) {
+    public SlotDetails deleteBooking(String id,String type) {
         //TODO:
         //Delete booking if exists and throw an error if not, delete must cascade
         return null;
     }
 
     @Override
-    public SlotDetails createBookingSlot(Booking booking) {
+    public SlotDetails createBookingSlot(Booking booking,String type) {
         return null;
     }
 
     @Override
-    public SlotDetails[] getAvailableSlots() {
+    public SlotDetails[] getAvailableSlots(String type) {
         RestTemplate restTemplate = new RestTemplate();
         try {
             String url = "http://localhost:8081/homeaffairs";

@@ -1,8 +1,8 @@
-package com.example.clinicBooking.service;
+package com.example.slotsBooking.service;
 
-import com.example.clinicBooking.model.Booking;
+import com.example.slotsBooking.model.Booking;
 import java.util.List;
-public interface BookingService {
+public interface ClinicBookingService {
     Booking createBooking(Booking booking);
     List<Booking> fetchBookingList();
     Booking updateBooking(String bookingId, String bookingReference);
