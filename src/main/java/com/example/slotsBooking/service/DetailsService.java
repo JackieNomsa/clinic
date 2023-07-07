@@ -8,6 +8,6 @@ public interface DetailsService {
 
     SlotDetails getBookingDetails(String id,String type);
     SlotDetails deleteBooking(String id,String type);
-    SlotDetails createBookingSlot(Booking booking,SlotDetails slotDetails,String type);
+    SlotDetails createBookingSlot(Booking booking,String type);
     SlotDetails[] getAvailableSlots(String type);
 }
