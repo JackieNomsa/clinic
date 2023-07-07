@@ -16,7 +16,6 @@ import java.util.List;
 public class ClinicController {
     private final ClinicClinicBookingServiceImp clinicBookingServiceImp;
     private final DetailsServiceImp detailsServiceImp;
-    BookingType type = BookingType.CLINIC;
     public ClinicController(ClinicClinicBookingServiceImp clinicBookingServiceImp, DetailsServiceImp detailsServiceImp){
         this.clinicBookingServiceImp = clinicBookingServiceImp;
         this.detailsServiceImp = detailsServiceImp;
@@ -24,10 +23,9 @@ public class ClinicController {
     @PostMapping("/create")
     public ResponseEntity<?> addPatient(@RequestBody Booking patient) {
         Booking booking = this.clinicBookingServiceImp.createBooking(patient);
-        SlotDetails[] availableSlots = detailsServiceImp.getAvailableSlots(this.type);
+        SlotDetails[] availableSlots = detailsServiceImp.getAvailableSlots(BookingType.CLINIC);
         if(booking != null){
             return ResponseEntity.status(HttpStatus.OK).body(availableSlots);
-
         }return ResponseEntity.status(HttpStatus.CONFLICT).build();
 
     }

@@ -3,8 +3,8 @@ package com.example.slotsBooking.controller;
 import com.example.slotsBooking.model.Booking;
 import com.example.slotsBooking.model.BookingType;
 import com.example.slotsBooking.model.SlotDetails;
-import com.example.slotsBooking.service.ClinicClinicBookingServiceImp;
 import com.example.slotsBooking.service.DetailsServiceImp;
+import com.example.slotsBooking.service.HomeAffairsServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,17 +14,17 @@ import java.util.List;
 @RestController
 @RequestMapping("/homeaffairs")
 public class HomeAffairsController {
-    private final ClinicClinicBookingServiceImp clinicBookingServiceImp;
+    private final HomeAffairsServiceImpl homeAffairsServiceImpl;
     private final DetailsServiceImp detailsServiceImp;
     BookingType type = BookingType.HOMEAFFAIRS;
-    public HomeAffairsController(ClinicClinicBookingServiceImp clinicBookingServiceImp, DetailsServiceImp detailsServiceImp) {
-        this.clinicBookingServiceImp = clinicBookingServiceImp;
+    public HomeAffairsController(HomeAffairsServiceImpl homeAffairsServiceImpl, DetailsServiceImp detailsServiceImp) {
+        this.homeAffairsServiceImpl = homeAffairsServiceImpl;
         this.detailsServiceImp = detailsServiceImp;
     }
 
     @PostMapping("/create")
     public ResponseEntity<?> addClient(@RequestBody Booking client) {
-        Booking booking = this.clinicBookingServiceImp.createBooking(client);
+        Booking booking = this.homeAffairsServiceImpl.createBooking(client);
         SlotDetails[] availableSlots = detailsServiceImp.getAvailableSlots(this.type);
         if(booking != null){
             return ResponseEntity.status(HttpStatus.OK).body(availableSlots);
@@ -35,7 +35,7 @@ public class HomeAffairsController {
     @GetMapping("/getById/{id}")
     @ResponseBody
     public ResponseEntity<?> getPatient(@PathVariable String id){
-        Booking booking = this.clinicBookingServiceImp.getBookingById(id);
+        Booking booking = this.homeAffairsServiceImpl.getBookingById(id);
         if(booking != null) return ResponseEntity.ok().body(booking);
         return ResponseEntity.notFound().build();
     }
@@ -43,21 +43,21 @@ public class HomeAffairsController {
     @GetMapping("/getAll")
     @ResponseBody
     public ResponseEntity<?> getAllBookings(){
-        List<Booking> bookings = this.clinicBookingServiceImp.fetchBookingList();
+        List<Booking> bookings = this.homeAffairsServiceImpl.fetchBookingList();
         if(bookings != null) return ResponseEntity.ok().body(bookings);
         return ResponseEntity.notFound().build();
     }
 
     @PutMapping("/update")
     public ResponseEntity<?> updateClient(@RequestBody String clientId,String bookingReference){
-        Booking booking = this.clinicBookingServiceImp.updateBooking(clientId,bookingReference);
+        Booking booking = this.homeAffairsServiceImpl.updateBooking(clientId,bookingReference);
         if(booking != null) return ResponseEntity.ok().body(booking);
         return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteClient(@PathVariable String id){
-        Booking booking = this.clinicBookingServiceImp.deleteBookingById(id);
+        Booking booking = this.homeAffairsServiceImpl.deleteBookingById(id);
         if(booking != null) return ResponseEntity.ok().build();
         return ResponseEntity.notFound().build();
     }
