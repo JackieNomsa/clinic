@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
 @RestController
 @RequestMapping("/clinic")
 public class ClinicController {
@@ -49,14 +48,14 @@ public class ClinicController {
         return ResponseEntity.notFound().build();
     }
 
-    @PostMapping("/update")
+    @PutMapping("/update")
     public ResponseEntity<?> updatePatient(@RequestBody String patientId,String bookingReference){
         Booking booking = this.clinicBookingServiceImp.updateBooking(patientId,bookingReference);
         if(booking != null) return ResponseEntity.ok().body(booking);
         return ResponseEntity.notFound().build();
     }
 
-    @PostMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deletePatient(@PathVariable String id){
         Booking booking = this.clinicBookingServiceImp.deleteBookingById(id);
         if(booking != null) return ResponseEntity.ok().build();

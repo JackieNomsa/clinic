@@ -26,6 +26,7 @@ public class ClinicClinicBookingServiceImp implements ClinicBookingService {
         booking.setLastName(patient.getLastName());
         booking.setPatientId(patient.getPatientId());
         booking.setStatus(patient.getStatus());
+        booking.setBookingRef(patient.getBookingRef());
         clinicBookingRepository.save(booking);
         return booking;
     }

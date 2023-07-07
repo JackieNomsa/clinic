@@ -28,7 +28,6 @@ public class HomeAffairsController {
         SlotDetails[] availableSlots = detailsServiceImp.getAvailableSlots(this.type);
         if(booking != null){
             return ResponseEntity.status(HttpStatus.OK).body(availableSlots);
-
         }return ResponseEntity.status(HttpStatus.CONFLICT).build();
     }
 
@@ -49,14 +48,14 @@ public class HomeAffairsController {
         return ResponseEntity.notFound().build();
     }
 
-    @PostMapping("/update")
+    @PutMapping("/update")
     public ResponseEntity<?> updateClient(@RequestBody String clientId,String bookingReference){
         Booking booking = this.clinicBookingServiceImp.updateBooking(clientId,bookingReference);
         if(booking != null) return ResponseEntity.ok().body(booking);
         return ResponseEntity.notFound().build();
     }
 
-    @PostMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteClient(@PathVariable String id){
         Booking booking = this.clinicBookingServiceImp.deleteBookingById(id);
         if(booking != null) return ResponseEntity.ok().build();

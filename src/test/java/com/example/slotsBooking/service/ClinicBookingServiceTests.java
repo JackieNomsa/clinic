@@ -91,7 +91,7 @@ public class ClinicBookingServiceTests {
         Booking testBooking = bookingService.getBookingById("1234567890345");
         assert testBooking != null;
         Booking updateBooking = bookingService.updateBooking(testBooking.getPatientId(),"43456");
-        assertEquals("booked",updateBooking.getLastName());
+        assertEquals("booked",updateBooking.getStatus());
         assertEquals("1234567890345",updateBooking.getPatientId());
         assertEquals("43456",updateBooking.getBookingRef());
 
