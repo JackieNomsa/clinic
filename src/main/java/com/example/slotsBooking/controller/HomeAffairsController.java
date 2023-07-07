@@ -1,7 +1,6 @@
 package com.example.slotsBooking.controller;
 
 import com.example.slotsBooking.model.Booking;
-import com.example.slotsBooking.model.BookingType;
 import com.example.slotsBooking.model.SlotDetails;
 import com.example.slotsBooking.service.DetailsServiceImp;
 import com.example.slotsBooking.service.HomeAffairsServiceImpl;
@@ -16,7 +15,6 @@ import java.util.List;
 public class HomeAffairsController {
     private final HomeAffairsServiceImpl homeAffairsServiceImpl;
     private final DetailsServiceImp detailsServiceImp;
-    BookingType type = BookingType.HOMEAFFAIRS;
     public HomeAffairsController(HomeAffairsServiceImpl homeAffairsServiceImpl, DetailsServiceImp detailsServiceImp) {
         this.homeAffairsServiceImpl = homeAffairsServiceImpl;
         this.detailsServiceImp = detailsServiceImp;

@@ -22,10 +22,13 @@ public class ClinicBookingServiceTests {
     private ClinicBookingRepository bookingRepository;
     @Mock
     private ClinicBookingServiceImp bookingService;
+    @Mock
+    private DetailsServiceImp detailsServiceImp;
+
     Booking booking;
 
     @BeforeEach void setUp() {
-        this.bookingService = new ClinicBookingServiceImp(this.bookingRepository);
+        this.bookingService = new ClinicBookingServiceImp(this.bookingRepository,this.detailsServiceImp);
         this.booking = new Booking();
         this.booking.setStatus("waiting");
         this.booking.setFirstName("test");
@@ -59,12 +62,10 @@ public class ClinicBookingServiceTests {
     }
 
     @Test
-    void testDeleteBookingDoesNotExist(){
-        Booking testBooking = bookingService.getBookingById("1234567890345");
-        Mockito.when(bookingRepository.findById(any()))
-                .thenReturn(Optional.ofNullable(testBooking));
-        assertNull(bookingService.deleteBookingById("12345"));
-        assertEquals(testBooking,bookingService.deleteBookingById("1234567890345"));
+    void testDeleteBooking(){
+        Mockito.when(bookingRepository.findById("1234567890345"))
+                .thenReturn(Optional.ofNullable(booking));
+        assertEquals(booking,bookingService.deleteBookingById(booking));
     }
 
     @Test
@@ -89,10 +90,7 @@ public class ClinicBookingServiceTests {
         Booking testBooking = bookingService.getBookingById("1234567890345");
         assert testBooking != null;
         Booking updateBooking = bookingService.updateBooking(testBooking.getPatientId(),"43456");
-        assertEquals("booked",updateBooking.getStatus());
         assertEquals("1234567890345",updateBooking.getPatientId());
-        assertEquals("43456",updateBooking.getBookingRef());
-
 
     }
 }

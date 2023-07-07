@@ -53,8 +53,8 @@ public class ClinicController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deletePatient(@PathVariable String id){
-        Booking booking = this.clinicBookingServiceImp.deleteBookingById(id);
+    public ResponseEntity<?> deletePatient(@RequestBody Booking patient,@PathVariable String bookingReference){
+        Booking booking = this.clinicBookingServiceImp.deleteBookingById(patient);
         if(booking != null) return ResponseEntity.ok().build();
         return ResponseEntity.notFound().build();
     }

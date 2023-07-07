@@ -7,5 +7,5 @@ public interface ClinicBookingService {
     List<Booking> fetchBookingList();
     Booking updateBooking(String bookingId, String bookingReference);
     Booking getBookingById(String bookingId);
-    Booking deleteBookingById(String bookingId);
+    Booking deleteBookingById(Booking booking);
 }

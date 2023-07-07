@@ -8,23 +8,17 @@ import java.io.Serializable;
 @Entity
 @Table(name="slots_booking")
 public class Booking implements Serializable {
-
     @Id
     @Column(name="patient_id")
     private String patientId;
-
     @Column(name="first_name")
     private String firstName;
-
     @Column(name = "last_name")
     private String lastName;
-
     @Column(name = "status")
     private String status;
-
     @Column(name = "booking_reference")
     private String booking_ref;
-
     public String getBookingRef() {
         return booking_ref;
     }
