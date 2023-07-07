@@ -11,7 +11,6 @@ import java.util.Optional;
 
 @Service
 public class HomeAffairsServiceImpl implements HomeAffairsService{
-    @Autowired
     private final HomeAffairsBookingRepository homeAffairsBookingRepository;
 
     @Value("slots.service.url")

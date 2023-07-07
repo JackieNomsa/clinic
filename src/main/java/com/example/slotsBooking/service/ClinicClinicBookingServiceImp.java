@@ -10,11 +10,9 @@ import java.util.Optional;
 
 @Service
 public class ClinicClinicBookingServiceImp implements ClinicBookingService {
-    @Autowired
     private final ClinicBookingRepository clinicBookingRepository;
     @Value("slots.service.url")
     String slotsUrl;
-    @Autowired
     public ClinicClinicBookingServiceImp(ClinicBookingRepository bookingRepository) {
         this.clinicBookingRepository = bookingRepository;
     }
