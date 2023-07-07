@@ -1,6 +1,7 @@
 package com.example.slotsBooking.controller;
 
 import com.example.slotsBooking.model.Booking;
+import com.example.slotsBooking.model.BookingType;
 import com.example.slotsBooking.model.SlotDetails;
 import com.example.slotsBooking.service.ClinicClinicBookingServiceImp;
 import com.example.slotsBooking.service.DetailsServiceImp;
@@ -16,7 +17,7 @@ import java.util.List;
 public class ClinicController {
     private final ClinicClinicBookingServiceImp clinicBookingServiceImp;
     private final DetailsServiceImp detailsServiceImp;
-    String type = "clinic";
+    BookingType type = BookingType.CLINIC;
     public ClinicController(ClinicClinicBookingServiceImp clinicBookingServiceImp, DetailsServiceImp detailsServiceImp){
         this.clinicBookingServiceImp = clinicBookingServiceImp;
         this.detailsServiceImp = detailsServiceImp;

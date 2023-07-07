@@ -1,6 +1,7 @@
 package com.example.slotsBooking.service;
 
 import com.example.slotsBooking.model.Booking;
+import com.example.slotsBooking.model.BookingType;
 import com.example.slotsBooking.model.SlotDetails;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -42,10 +43,14 @@ public class DetailsServiceImp implements DetailsService{
     }
 
     @Override
-    public SlotDetails[] getAvailableSlots(String type) {
+    public SlotDetails[] getAvailableSlots(BookingType type) {
         RestTemplate restTemplate = new RestTemplate();
         try {
-            return restTemplate.getForObject(this.slotsUrl.concat(type), SlotDetails[].class);
+            if(type.equals(BookingType.HOMEAFFAIRS)) {
+                return restTemplate.getForObject(this.slotsUrl.concat("homeaffairs"), SlotDetails[].class);
+            }else{
+                return restTemplate.getForObject(this.slotsUrl.concat("clinic"), SlotDetails[].class);
+            }
         }catch (RestClientException e){
             return null;
         }

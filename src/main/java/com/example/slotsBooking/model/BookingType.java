@@ -1,6 +1,6 @@
 package com.example.slotsBooking.model;
 
-public enum Type {
+public enum BookingType {
     HOMEAFFAIRS,
     CLINIC,
 }
