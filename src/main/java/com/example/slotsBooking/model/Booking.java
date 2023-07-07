@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name="clinic_booking")
+@Table(name="slots_booking")
 public class Booking implements Serializable {
 
     @Id
@@ -22,7 +22,7 @@ public class Booking implements Serializable {
     @Column(name = "status")
     private String status;
 
-    @Column(name = "booking_ref")
+    @Column(name = "booking_reference")
     private String booking_ref;
 
     public String getBookingRef() {
