@@ -15,44 +15,21 @@ public class DetailsServiceImp implements DetailsService{
     RestTemplate restTemplate;
     @Override
     public SlotDetails getBookingDetails(String id,String type) {
-        SlotDetails slotDetails;
-        restTemplate = new RestTemplate();
-        try {
-            return restTemplate.getForObject(this.slotsUrl.concat(type).concat(id), SlotDetails.class);
-        }catch (RestClientException e){
-            return null;
-        }
+        return new RestTemplate().getForObject(this.slotsUrl.concat(type).concat(id), SlotDetails.class);
     }
 
     @Override
     public SlotDetails deleteBooking(String id,String type) {
-        restTemplate = new RestTemplate();
-        try {
-            return restTemplate.getForObject(this.slotsUrl.concat(type).concat("/delete/"+id), SlotDetails.class);
-        }catch (RestClientException e){
-            return null;
-        }
+        return new RestTemplate().getForObject(this.slotsUrl.concat(type).concat("/delete/"+id), SlotDetails.class);
     }
 
     @Override
-    public Booking createBookingSlot(Booking booking,SlotDetails slotDetails,String type) {
-        //TODO
-        // add reference to slot detail / Booking
-        // update booking status
-        return null;
+    public SlotDetails createBookingSlot(Booking booking,SlotDetails slotDetails,String type) {
+        return new RestTemplate().getForObject(this.slotsUrl.concat(type).concat("/create/"), SlotDetails.class);
     }
 
     @Override
-    public SlotDetails[] getAvailableSlots(BookingType type) {
-        RestTemplate restTemplate = new RestTemplate();
-        try {
-            if(type.equals(BookingType.HOMEAFFAIRS)) {
-                return restTemplate.getForObject(this.slotsUrl.concat("homeaffairs"), SlotDetails[].class);
-            }else{
-                return restTemplate.getForObject(this.slotsUrl.concat("clinic"), SlotDetails[].class);
-            }
-        }catch (RestClientException e){
-            return null;
-        }
+    public SlotDetails[] getAvailableSlots(String type) {
+        return new RestTemplate().getForObject(this.slotsUrl.concat("homeaffairs"), SlotDetails[].class);
     }
 }

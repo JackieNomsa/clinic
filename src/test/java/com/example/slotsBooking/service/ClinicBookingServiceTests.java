@@ -2,7 +2,6 @@ package com.example.slotsBooking.service;
 
 import com.example.slotsBooking.model.Booking;
 import com.example.slotsBooking.repository.ClinicBookingRepository;
-import com.example.slotsBooking.repository.HomeAffairsBookingRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,7 +11,6 @@ import static org.mockito.ArgumentMatchers.any;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.Objects;
@@ -23,11 +21,11 @@ public class ClinicBookingServiceTests {
     @Mock
     private ClinicBookingRepository bookingRepository;
     @Mock
-    private ClinicClinicBookingServiceImp bookingService;
+    private ClinicBookingServiceImp bookingService;
     Booking booking;
 
     @BeforeEach void setUp() {
-        this.bookingService = new ClinicClinicBookingServiceImp(this.bookingRepository);
+        this.bookingService = new ClinicBookingServiceImp(this.bookingRepository);
         this.booking = new Booking();
         this.booking.setStatus("waiting");
         this.booking.setFirstName("test");

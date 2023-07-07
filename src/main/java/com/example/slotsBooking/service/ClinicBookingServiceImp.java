@@ -8,11 +8,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ClinicClinicBookingServiceImp implements ClinicBookingService {
+public class ClinicBookingServiceImp implements ClinicBookingService {
     private final ClinicBookingRepository clinicBookingRepository;
     @Value("slots.service.url")
     String slotsUrl;
-    public ClinicClinicBookingServiceImp(ClinicBookingRepository bookingRepository) {
+    public ClinicBookingServiceImp(ClinicBookingRepository bookingRepository) {
         this.clinicBookingRepository = bookingRepository;
     }
 

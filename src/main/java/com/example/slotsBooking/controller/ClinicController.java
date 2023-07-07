@@ -1,9 +1,8 @@
 package com.example.slotsBooking.controller;
 
 import com.example.slotsBooking.model.Booking;
-import com.example.slotsBooking.model.BookingType;
 import com.example.slotsBooking.model.SlotDetails;
-import com.example.slotsBooking.service.ClinicClinicBookingServiceImp;
+import com.example.slotsBooking.service.ClinicBookingServiceImp;
 import com.example.slotsBooking.service.DetailsServiceImp;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,16 +13,16 @@ import java.util.List;
 @RestController
 @RequestMapping("/clinic")
 public class ClinicController {
-    private final ClinicClinicBookingServiceImp clinicBookingServiceImp;
+    private final ClinicBookingServiceImp clinicBookingServiceImp;
     private final DetailsServiceImp detailsServiceImp;
-    public ClinicController(ClinicClinicBookingServiceImp clinicBookingServiceImp, DetailsServiceImp detailsServiceImp){
+    public ClinicController(ClinicBookingServiceImp clinicBookingServiceImp, DetailsServiceImp detailsServiceImp){
         this.clinicBookingServiceImp = clinicBookingServiceImp;
         this.detailsServiceImp = detailsServiceImp;
     }
     @PostMapping("/create")
     public ResponseEntity<?> addPatient(@RequestBody Booking patient) {
         Booking booking = this.clinicBookingServiceImp.createBooking(patient);
-        SlotDetails[] availableSlots = detailsServiceImp.getAvailableSlots(BookingType.CLINIC);
+        SlotDetails[] availableSlots = detailsServiceImp.getAvailableSlots("clinic");
         if(booking != null){
             return ResponseEntity.status(HttpStatus.OK).body(availableSlots);
         }return ResponseEntity.status(HttpStatus.CONFLICT).build();

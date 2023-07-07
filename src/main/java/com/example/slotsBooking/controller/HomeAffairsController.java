@@ -25,7 +25,7 @@ public class HomeAffairsController {
     @PostMapping("/create")
     public ResponseEntity<?> addClient(@RequestBody Booking client) {
         Booking booking = this.homeAffairsServiceImpl.createBooking(client);
-        SlotDetails[] availableSlots = detailsServiceImp.getAvailableSlots(this.type);
+        SlotDetails[] availableSlots = detailsServiceImp.getAvailableSlots("homeaffairs");
         if(booking != null){
             return ResponseEntity.status(HttpStatus.OK).body(availableSlots);
         }return ResponseEntity.status(HttpStatus.CONFLICT).build();
