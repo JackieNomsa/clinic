@@ -1,11 +1,11 @@
 package com.example.slotsBooking.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class SlotDetails {
     private String _id;
-    private Date createdAt;
-    private Date updatedAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
     private String reference;
     private String time;
     private String location;
@@ -18,16 +18,16 @@ public class SlotDetails {
     public void set_id(String _id) {
         this._id = _id;
     }
-    public Date getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
-    public Date getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
-    public void setUpdatedAt(Date updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
     public String getReference() {
@@ -53,12 +53,6 @@ public class SlotDetails {
     }
     public void setBooked(boolean booked) {
         this.booked = booked;
-    }
-    public Date getDate() {
-        return updatedAt;
-    }
-    public void setDate(Date date) {
-        this.updatedAt = date;
     }
     public String getType() {
         return type;
