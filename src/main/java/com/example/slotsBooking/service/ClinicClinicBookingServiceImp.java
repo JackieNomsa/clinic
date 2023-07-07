@@ -2,7 +2,6 @@ package com.example.slotsBooking.service;
 
 import com.example.slotsBooking.model.Booking;
 import com.example.slotsBooking.repository.ClinicBookingRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import java.util.List;

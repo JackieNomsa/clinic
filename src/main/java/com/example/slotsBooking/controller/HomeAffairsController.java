@@ -4,7 +4,6 @@ import com.example.slotsBooking.model.Booking;
 import com.example.slotsBooking.model.SlotDetails;
 import com.example.slotsBooking.service.ClinicClinicBookingServiceImp;
 import com.example.slotsBooking.service.DetailsServiceImp;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,9 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/homeaffairs")
 public class HomeAffairsController {
-    @Autowired
     private final ClinicClinicBookingServiceImp clinicBookingServiceImp;
-    @Autowired
     private final DetailsServiceImp detailsServiceImp;
     String type = "homeaffairs";
     public HomeAffairsController(ClinicClinicBookingServiceImp clinicBookingServiceImp, DetailsServiceImp detailsServiceImp) {
