@@ -19,7 +19,6 @@ import java.util.Map;
 public class DetailsServiceImp implements DetailsService{
     @Value("slots.service.url")
     String slotsUrl;
-    RestTemplate restTemplate;
     @Override
     public SlotDetails getBookingDetails(String id,String type) {
         return new RestTemplate().getForObject(this.slotsUrl.concat(type).concat(id), SlotDetails.class);
