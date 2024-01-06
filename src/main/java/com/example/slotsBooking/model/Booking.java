@@ -2,13 +2,17 @@ package com.example.slotsBooking.model;
 
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-
+@Data
 @Entity
 @Builder
-@Table(name="slots_booking")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Booking implements Serializable {
     @Id
     @Column(name="patient_id")
@@ -19,14 +23,14 @@ public class Booking implements Serializable {
     private String lastName;
     @Column(name = "status")
     private String status;
-    @Column(name = "booking_reference")
-    private String booking_ref;
+    @Column(name = "bookingReference")
+    private String bookingRef;
     public String getBookingRef() {
-        return booking_ref;
+        return bookingRef;
     }
 
-    public void setBookingRef(String booking_ref) {
-        this.booking_ref = booking_ref;
+    public void setBookingRef(String bookingRef) {
+        this.bookingRef = bookingRef;
     }
 
     public String getPatientId() {

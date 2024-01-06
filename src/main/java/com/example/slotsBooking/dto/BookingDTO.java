@@ -10,5 +10,4 @@ public class BookingDTO {
     private String firstName;
     private String lastName;
     private String status;
-    private String booking_reference;
 }
