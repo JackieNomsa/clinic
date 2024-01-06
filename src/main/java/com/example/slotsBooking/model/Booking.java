@@ -2,10 +2,12 @@ package com.example.slotsBooking.model;
 
 
 import jakarta.persistence.*;
+import lombok.Builder;
 
 import java.io.Serializable;
 
 @Entity
+@Builder
 @Table(name="slots_booking")
 public class Booking implements Serializable {
     @Id
